@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import { ErrorMessage, StyledCounter, StyledBlock} from "./Counter.styles";
+import {ErrorMessage, StyledCounter, StyledBlock, PrintValueStyle} from "./Counter.styles";
 
 
 export type CounterPropsType = {}
@@ -73,9 +73,9 @@ export const Counter = (props: CounterPropsType) => {
                     <div>Enter the source data</div>
                     :
                     <>
-                        <div>
+                        <PrintValueStyle max={ptintValue >= maxValue}>
                             {ptintValue}
-                        </div>
+                        </PrintValueStyle>
                         <div>
                             <button disabled={ptintValue >= maxValue || error} onClick={() => {
                                 setPtintValue(+ptintValue + 1)

@@ -19,24 +19,24 @@ export const StyledBlock = styled.div`
   border: 2px solid #709bdb;
   margin: 10px;
   width: 350px;
- 
+
 `;
 
 export const ErrorMessage = styled.div`
   font-size: 1.5em;
   text-align: center;
   color: #db7070;
-  
+
 `;
 
 
-export const SetButtonStyled=styled.button`
-    background: transparent;
-    border: 2px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    border-radius: 15px;
-    padding: 10px 25px;
-    cursor: pointer;
-    margin: 0 10px;
-    transition: all 0.05s ease-in-out;`
+
+interface PrintValueStyleProps {
+    max: boolean
+}
+
+export const PrintValueStyle = styled.div<PrintValueStyleProps>`
+  font-weight:600 ;
+  font-size: 32px;
+  color: ${props => props.max ? "rgba(132, 219, 112)": "black"};
+`

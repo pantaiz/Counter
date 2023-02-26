@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import {StyledLeftBlock, ErrorMessage, StyledCounter, StyledRightBlock} from "./Counter.styles";
+import { ErrorMessage, StyledCounter, StyledBlock} from "./Counter.styles";
 
 
 export type CounterPropsType = {}
@@ -27,7 +27,7 @@ export const Counter = (props: CounterPropsType) => {
         const newValue=+e.currentTarget.value
         setMaxValue(newValue)
         setDisabledRightBlock(true)
-        newValue > startValue ? setError(false) : setError(true)
+        newValue > startValue && startValue >=0&& newValue>=0? setError(false) : setError(true)
 
     }
 
@@ -35,14 +35,17 @@ export const Counter = (props: CounterPropsType) => {
         const newValue=+e.currentTarget.value
         setStartValue(newValue)
         setDisabledRightBlock(true)
-        maxValue > newValue ? setError(false) : setError(true)
+        maxValue > newValue &&newValue >=0&& maxValue>=0 ? setError(false) : setError(true)
+
 
 
     }
     return (
         <StyledCounter>
-            <StyledLeftBlock>#левый блок
-                <ErrorMessage>{error && 'ERROR'}</ErrorMessage>
+
+            <StyledBlock>
+                <h3>SETTINGS</h3>
+
                 <div>
                     max value: <input value={maxValue} type={"number"} onChange={onChangeMaxValueHandler}/>
                 </div>
@@ -55,17 +58,19 @@ export const Counter = (props: CounterPropsType) => {
 
                     <button
                         onClick={onSetClickHandler}
+                        disabled={error||!disabledRightBlock}
                     >
                         set
                     </button>
-
+                    <ErrorMessage>{error && 'ERROR'}</ErrorMessage>
                 </div>
-            </StyledLeftBlock>
+            </StyledBlock>
 
 
-            <StyledRightBlock>#правый блок
+            <StyledBlock>
+                <h3>OUTPUT </h3>
                 {disabledRightBlock ?
-                    <div>PRESS SET</div>
+                    <div>Enter the source data</div>
                     :
                     <>
                         <div>
@@ -84,7 +89,7 @@ export const Counter = (props: CounterPropsType) => {
                             </button>
                         </div>
                     </>}
-            </StyledRightBlock>
+            </StyledBlock>
         </StyledCounter>
     )
 

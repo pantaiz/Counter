@@ -1,27 +1,53 @@
-
 .App {
-  padding: 30px;
-  display: flex;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;}
+button{
+
+    text-align: center;
+    font-size: 22px;
+    border-radius: 15px;
+    padding: 10px 10px;
+    cursor: pointer;
+    margin:  10px;
+    transition: all 0.05s ease-in-out;
+    box-shadow: 0 4px 0 rgba(112, 155, 219, 0.15);
+   border: 1px solid rgba(112, 155, 219, 0.15);
+    background: rgba(112, 155, 219, 0.25);
+    color:black;
 
 }
-
-.App > div {
-  margin-right: 50px;
+button:hover {
+    transform: translateY(-2px);
+    background: rgba(132, 219, 112, 0.8);
 }
 
-.error {
-  border: red 1px solid;
-}
 
-.error-message {
-  color: red;
+button:active {
+    transform: translateY(2px);
+    box-shadow: none;
 }
+h1 {
+    color: #000;
+    font-size: 7rem;
+    margin: 0;
+   }
 
-.active-filter {
-  background-color: aquamarine;
+input {
+    width: 200px;
+    font-size: 13px;
+    padding: 6px 0 4px 10px;
+    border: 1px solid #cecece;
+    background: #F6F6f6;
+    border-radius: 8px;
+    box-shadow: -22px 13px 38px 10px rgba(69, 156, 152, 0.2);
+    outline:none;
 }
+ button:disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 
-.is-done {
-  opacity: 0.5;
 }
-

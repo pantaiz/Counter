@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {ErrorMessage, StyledCounter, StyledBlock, PrintValueStyle} from "./Counter.styles";
 
 
@@ -13,6 +13,24 @@ export const Counter = (props: CounterPropsType) => {
     const [error, setError] = useState<boolean>(false)
     const [disabledRightBlock, setDisabledRightBlock] = useState<boolean>(true)
 
+    useEffect(() => {
+        const startValueLocalStorage=localStorage.getItem('startValue',)
+        if(startValueLocalStorage){setStartValue(JSON.parse(startValueLocalStorage))}
+
+        const maxValueLocalStorage=localStorage.getItem('maxValue',)
+        if(maxValueLocalStorage){setMaxValue(JSON.parse(maxValueLocalStorage))}
+
+        const ptintValueLocalStorage=localStorage.getItem('ptintValue',)
+        if(ptintValueLocalStorage){setPtintValue(JSON.parse(ptintValueLocalStorage))}
+
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('startValue', JSON.stringify(startValue))
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        localStorage.setItem('ptintValue', JSON.stringify(ptintValue))
+    }, [startValue, maxValue, ptintValue])
+
 
     const onSetClickHandler = () => {
         if (!error) {
@@ -24,19 +42,18 @@ export const Counter = (props: CounterPropsType) => {
     }
 
     const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue=+e.currentTarget.value
+        const newValue = +e.currentTarget.value
         setMaxValue(newValue)
         setDisabledRightBlock(true)
-        newValue > startValue && startValue >=0&& newValue>=0? setError(false) : setError(true)
+        newValue > startValue && startValue >= 0 && newValue >= 0 ? setError(false) : setError(true)
 
     }
 
     const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue=+e.currentTarget.value
+        const newValue = +e.currentTarget.value
         setStartValue(newValue)
         setDisabledRightBlock(true)
-        maxValue > newValue &&newValue >=0&& maxValue>=0 ? setError(false) : setError(true)
-
+        maxValue > newValue && newValue >= 0 && maxValue >= 0 ? setError(false) : setError(true)
 
 
     }
@@ -58,7 +75,7 @@ export const Counter = (props: CounterPropsType) => {
 
                     <button
                         onClick={onSetClickHandler}
-                        disabled={error||!disabledRightBlock}
+                        disabled={error || !disabledRightBlock}
                     >
                         set
                     </button>
@@ -94,3 +111,4 @@ export const Counter = (props: CounterPropsType) => {
     )
 
 }
+

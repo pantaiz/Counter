@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {ErrorMessage, StyledCounter, StyledBlock, PrintValueStyle} from "./Counter.styles";
+import {UniversalButton} from "./Button/UniversalButton";
 
 
 export type CounterPropsType = {}
@@ -13,18 +14,26 @@ export const Counter = (props: CounterPropsType) => {
     const [error, setError] = useState<boolean>(false)
     const [disabledRightBlock, setDisabledRightBlock] = useState<boolean>(true)
 
+    //get data from local storage
     useEffect(() => {
-        const startValueLocalStorage=localStorage.getItem('startValue',)
-        if(startValueLocalStorage){setStartValue(JSON.parse(startValueLocalStorage))}
+        const startValueLocalStorage = localStorage.getItem('startValue',)
+        if (startValueLocalStorage) {
+            setStartValue(JSON.parse(startValueLocalStorage))
+        }
 
-        const maxValueLocalStorage=localStorage.getItem('maxValue',)
-        if(maxValueLocalStorage){setMaxValue(JSON.parse(maxValueLocalStorage))}
+        const maxValueLocalStorage = localStorage.getItem('maxValue',)
+        if (maxValueLocalStorage) {
+            setMaxValue(JSON.parse(maxValueLocalStorage))
+        }
 
-        const ptintValueLocalStorage=localStorage.getItem('ptintValue',)
-        if(ptintValueLocalStorage){setPtintValue(JSON.parse(ptintValueLocalStorage))}
+        const ptintValueLocalStorage = localStorage.getItem('ptintValue',)
+        if (ptintValueLocalStorage) {
+            setPtintValue(JSON.parse(ptintValueLocalStorage))
+        }
 
     }, [])
 
+    //push data to local storage
     useEffect(() => {
         localStorage.setItem('startValue', JSON.stringify(startValue))
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
@@ -72,17 +81,10 @@ export const Counter = (props: CounterPropsType) => {
                 </div>
 
                 <div>
-
-                    <button
-                        onClick={onSetClickHandler}
-                        disabled={error || !disabledRightBlock}
-                    >
-                        set
-                    </button>
+                    <UniversalButton title={'set'} disabled={error || !disabledRightBlock}  onClick={onSetClickHandler}/>
                     <ErrorMessage>{error && 'ERROR'}</ErrorMessage>
                 </div>
             </StyledBlock>
-
 
             <StyledBlock>
                 <h3>OUTPUT </h3>
@@ -94,16 +96,16 @@ export const Counter = (props: CounterPropsType) => {
                             {ptintValue}
                         </PrintValueStyle>
                         <div>
-                            <button disabled={ptintValue >= maxValue || error} onClick={() => {
-                                setPtintValue(+ptintValue + 1)
-                            }}>
-                                inc
-                            </button>
-                            <button disabled={error} onClick={() => {
-                                setPtintValue(startValue)
-                            }}>
-                                reset
-                            </button>
+                            <UniversalButton
+                                title={'set'}
+                                disabled={ptintValue >= maxValue || error}
+                                onClick={() => setPtintValue(+ptintValue + 1)}
+                            />
+                            <UniversalButton
+                                title={'reset'}
+                                disabled={error || ptintValue==startValue}
+                                onClick={() => setPtintValue(startValue)}
+                            />
                         </div>
                     </>}
             </StyledBlock>

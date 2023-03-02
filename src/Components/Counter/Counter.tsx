@@ -1,6 +1,8 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {ErrorMessage, StyledCounter, StyledBlock, PrintValueStyle} from "./Counter.styles";
-import {UniversalButton} from "./Button/UniversalButton";
+import {StyledCounter} from "./Counter.styles";
+
+import {SettingsScreen} from "./SettingsScreen/SettingsScreen";
+import {ResultScreen} from "./ResultScreen/ResultScreen";
 
 
 export type CounterPropsType = {}
@@ -40,7 +42,11 @@ export const Counter = (props: CounterPropsType) => {
         localStorage.setItem('ptintValue', JSON.stringify(ptintValue))
     }, [startValue, maxValue, ptintValue])
 
+    const disableIncButton = ptintValue >= maxValue || error
+    const disableResetButton = error || ptintValue == startValue
+    const disableSetButton = error || !disabledRightBlock
 
+    //Button "Set"
     const onSetClickHandler = () => {
         if (!error) {
             setPtintValue(+startValue)
@@ -48,6 +54,14 @@ export const Counter = (props: CounterPropsType) => {
         } else {
             setDisabledRightBlock(true)
         }
+    }
+    //on click Button "inc"
+    const onIncClickHandler = () => {
+        setPtintValue(+ptintValue + 1)
+    }
+    //on click Button "reset"
+    const onResetClickHandler = () => {
+        setPtintValue(startValue)
     }
 
     const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,47 +82,22 @@ export const Counter = (props: CounterPropsType) => {
     }
     return (
         <StyledCounter>
-
-            <StyledBlock>
-                <h3>SETTINGS</h3>
-
-                <div>
-                    max value: <input value={maxValue} type={"number"} onChange={onChangeMaxValueHandler}/>
-                </div>
-
-                <div>
-                    start value: <input value={startValue} type={"number"} onChange={onChangeStartValueHandler}/>
-                </div>
-
-                <div>
-                    <UniversalButton title={'set'} disabled={error || !disabledRightBlock}  onClick={onSetClickHandler}/>
-                    <ErrorMessage>{error && 'ERROR'}</ErrorMessage>
-                </div>
-            </StyledBlock>
-
-            <StyledBlock>
-                <h3>OUTPUT </h3>
-                {disabledRightBlock ?
-                    <div>Enter the source data</div>
-                    :
-                    <>
-                        <PrintValueStyle max={ptintValue >= maxValue}>
-                            {ptintValue}
-                        </PrintValueStyle>
-                        <div>
-                            <UniversalButton
-                                title={'set'}
-                                disabled={ptintValue >= maxValue || error}
-                                onClick={() => setPtintValue(+ptintValue + 1)}
-                            />
-                            <UniversalButton
-                                title={'reset'}
-                                disabled={error || ptintValue==startValue}
-                                onClick={() => setPtintValue(startValue)}
-                            />
-                        </div>
-                    </>}
-            </StyledBlock>
+            <SettingsScreen maxValue={maxValue}
+                            startValue={startValue}
+                            onChangeMaxValueHandler={onChangeMaxValueHandler}
+                            onChangeStartValueHandler={onChangeStartValueHandler}
+                            onSetClickHandler={onSetClickHandler}
+                            disableSetButton={disableSetButton}
+                            error={error}
+            />
+            <ResultScreen disabledRightBlock={disabledRightBlock}
+                          disableIncButton={disableIncButton}
+                          disableResetButton={disableResetButton}
+                          ptintValue={ptintValue}
+                          maxValue={maxValue}
+                          onResetClickHandler={onResetClickHandler}
+                          onIncClickHandler={onIncClickHandler}
+            />
         </StyledCounter>
     )
 

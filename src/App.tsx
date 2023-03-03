@@ -67,20 +67,34 @@ function App() {
         const newValue = +e.currentTarget.value
         setMaxValue(newValue)
         setDisabledRightBlock(true)
-        newValue > startValue ? setError('') : setError('maxValue > startValue')
-        startValue >= 0 ? setError('') : setError('Start value <0')
-        newValue >= 0 ? setError('') : setError('maxValue <0')
-
+        if (newValue < startValue) {
+            setError('GOOD JOB, MAN! COME ON, BREAK MY APP! YOUR INITIAL VALUE IS GREATER THAN THE MAXIMUM, YOU IDIOT!')
+        } else if (startValue < 0) {
+            setError('OF COURSE, TRY TO ENTER A NEGATIVE START VALUE AGAIN! MAYBE IT WILL WORK OUT!')
+        } else if (newValue < 0) {
+            setError('UDE, WHY ARE YOU ENTERING A NEGATIVE MAXIMUM NUMBER?')
+        } else if (startValue == newValue) {
+            setError('MY GOD, YOU HAVE TWO IDENTICAL NUMBERS, FIX IT!')
+        } else {
+            setError('')
+        }
     }
     //LOGIC Input 'Start number'
     const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = +e.currentTarget.value
         setStartValue(newValue)
         setDisabledRightBlock(true)
-        maxValue > newValue ? setError('') : setError('StartValue > startValue')
-
-        newValue >= 0 ? setError('') : setError('startValue <0')
-        maxValue >= 0 ? setError('') : setError(' MaxValue<0')
+        if (maxValue < newValue) {
+            setError('GOOD JOB, MAN! COME ON, BREAK MY APP! YOUR START VALUE IS GREATER THAN THE MAXIMUM, YOU IDIOT!')
+        } else if (newValue < 0) {
+            setError('OF COURSE, TRY TO ENTER A NEGATIVE START VALUE AGAIN! MAYBE IT WILL WORK OUT!')
+        } else if (maxValue < 0) {
+            setError(' DUDE, WHY ARE YOU ENTERING A NEGATIVE MAXIMUM NUMBER?')
+        } else if (maxValue == newValue) {
+            setError('MY GOD, YOU HAVE TWO IDENTICAL NUMBERS, FIX IT!')
+        } else {
+            setError('')
+        }
     }
     return (
         <div className="App">

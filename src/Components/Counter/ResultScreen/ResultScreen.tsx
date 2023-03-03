@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {PrintValueStyle, StyledResultScreen,ErrorMessage} from "./ResultScreen.styles";
+import {PrintValueStyle, StyledResultScreen, ErrorMessage, ErorrImage} from "./ResultScreen.styles";
 import {UniversalButton} from "../UniversalElement/Button/UniversalButton";
 
 type ResultScreenPropsType = {
@@ -27,8 +27,10 @@ export const ResultScreen: FC<ResultScreenPropsType> = (
 ) => {
     return (
         <StyledResultScreen>
+            {error?<ErrorMessage>{error}
+                { error&&<ErorrImage src={'https://www.meme-arsenal.com/memes/f049a0c27e77dff67c3ed78c6ce99187.jpg'}/>}</ErrorMessage>:<>
             <h3>OUTPUT </h3>
-            <ErrorMessage>{error}</ErrorMessage>
+
             {disabledRightBlock ?
                 <div>Enter the source data</div>
                 :
@@ -48,7 +50,7 @@ export const ResultScreen: FC<ResultScreenPropsType> = (
                             onClick={onResetClickHandler}
                         />
                     </div>
-                </>}
+                </>}</>}
         </StyledResultScreen>
     )
 

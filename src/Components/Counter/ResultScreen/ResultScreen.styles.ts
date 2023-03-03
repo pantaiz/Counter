@@ -18,7 +18,11 @@ export const ErrorMessage = styled.div`
   color: #db7070;
 
 `;
-
+export const ErorrImage=styled.img`
+  position: fixed;
+  right: 0px;
+  bottom: 300px;
+  width: 20%;`
 
 interface PrintValueStyleProps {
     max: boolean

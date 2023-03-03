@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {PrintValueStyle, StyledResultScreen} from "./ResultScreen.styles";
+import {PrintValueStyle, StyledResultScreen,ErrorMessage} from "./ResultScreen.styles";
 import {UniversalButton} from "../UniversalElement/Button/UniversalButton";
 
 type ResultScreenPropsType = {
@@ -8,6 +8,7 @@ type ResultScreenPropsType = {
     maxValue: number
     disableIncButton: boolean
     disableResetButton: boolean
+    error:string,
     onResetClickHandler: () => void
     onIncClickHandler: () => void
 }
@@ -19,7 +20,7 @@ export const ResultScreen: FC<ResultScreenPropsType> = (
         disableResetButton,
         ptintValue,
         maxValue,
-
+        error,
         onResetClickHandler,
         onIncClickHandler
     }
@@ -27,6 +28,7 @@ export const ResultScreen: FC<ResultScreenPropsType> = (
     return (
         <StyledResultScreen>
             <h3>OUTPUT </h3>
+            <ErrorMessage>{error}</ErrorMessage>
             {disabledRightBlock ?
                 <div>Enter the source data</div>
                 :

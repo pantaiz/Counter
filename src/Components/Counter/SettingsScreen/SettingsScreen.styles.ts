@@ -12,9 +12,3 @@ export const StyledSettingsScreen = styled.div`
 
 `;
 
-export const ErrorMessage = styled.div`
-  font-size: 1.5em;
-  text-align: center;
-  color: #db7070;
-
-`;

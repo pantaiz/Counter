@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FC} from "react";
-import {StyledSettingsScreen, ErrorMessage} from "./SettingsScreen.styles";
+import {StyledSettingsScreen, } from "./SettingsScreen.styles";
 import {UniversalInput} from "../UniversalElement/Input/UniversalInput";
 import {UniversalButton} from "../UniversalElement/Button/UniversalButton";
 
@@ -12,7 +12,7 @@ type SettingsScreeProps = {
 
     onSetClickHandler: () => void
     disableSetButton: boolean
-    error: boolean
+    error: string
 }
 
 export const SettingsScreen: FC<SettingsScreeProps> = (
@@ -40,7 +40,6 @@ export const SettingsScreen: FC<SettingsScreeProps> = (
                             onChange={onChangeStartValueHandler}
             />
             <UniversalButton title={'set'} disabled={disableSetButton} onClick={onSetClickHandler}/>
-            <ErrorMessage>{error && 'ERROR'}</ErrorMessage>
         </StyledSettingsScreen>
     )
 

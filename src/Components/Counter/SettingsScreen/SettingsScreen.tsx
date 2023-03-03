@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC} from "react";
 import {StyledSettingsScreen, } from "./SettingsScreen.styles";
 import {UniversalInput} from "../UniversalElement/Input/UniversalInput";
 import {UniversalButton} from "../UniversalElement/Button/UniversalButton";
+import {errorInputsType} from "../../../App";
 
 type SettingsScreeProps = {
     maxValue: number
@@ -12,6 +13,7 @@ type SettingsScreeProps = {
 
     onSetClickHandler: () => void
     disableSetButton: boolean
+    errorInputs:errorInputsType
     error: string
 }
 
@@ -23,6 +25,7 @@ export const SettingsScreen: FC<SettingsScreeProps> = (
         onChangeStartValueHandler,
         disableSetButton,
         onSetClickHandler,
+        errorInputs,
         error
     }
 ) => {
@@ -33,11 +36,15 @@ export const SettingsScreen: FC<SettingsScreeProps> = (
                             value={maxValue}
                             type={"number"}
                             onChange={onChangeMaxValueHandler}
+
+                            errorInputs={errorInputs.maxInputError} //styled props
             />
             <UniversalInput textBefor={'start value:'}
                             value={startValue}
                             type={"number"}
                             onChange={onChangeStartValueHandler}
+
+                            errorInputs={errorInputs.startInputError} //styled props
             />
             <UniversalButton title={'set'} disabled={disableSetButton} onClick={onSetClickHandler}/>
         </StyledSettingsScreen>

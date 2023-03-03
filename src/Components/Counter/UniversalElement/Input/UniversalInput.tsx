@@ -7,6 +7,7 @@ type UniversalInputProps={
     type:'number'
     onChange:(e:ChangeEvent<HTMLInputElement>)=>void,
     onKeyDown?:()=>void
+    errorInputs:boolean
 }
 
 
@@ -23,7 +24,8 @@ export const UniversalInput:FC<UniversalInputProps>=(
             <StyledUniversalInput
                 value={value}
                 type={type}
-                onChange={(e)=>props.onChange(e)}/>
+                onChange={(e)=>props.onChange(e)}
+                errorInputs={props.errorInputs}/>
         </>
 
     )

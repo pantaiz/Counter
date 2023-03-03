@@ -3,6 +3,7 @@ import {StyledCounter} from "./Counter.styles";
 
 import {SettingsScreen} from "./SettingsScreen/SettingsScreen";
 import {ResultScreen} from "./ResultScreen/ResultScreen";
+import {errorInputsType} from "../../App";
 
 
 export type CounterPropsType = {
@@ -10,10 +11,12 @@ export type CounterPropsType = {
     maxValue: number,
     startValue: number,
     disableSetButton: boolean,
+    errorInputs:errorInputsType
     error: string,
     onChangeMaxValueHandler: (e: ChangeEvent<HTMLInputElement>) => void,
     onChangeStartValueHandler: (e: ChangeEvent<HTMLInputElement>) => void,
     onSetClickHandler: () => void,
+
 
     //Result Screen
     ptintValue: number,
@@ -37,6 +40,7 @@ export const Counter: FC<CounterPropsType> = (
         onSetClickHandler,
         disableSetButton,
         error,
+        errorInputs,
 
         //Result Screen
         disabledRightBlock,
@@ -56,6 +60,7 @@ export const Counter: FC<CounterPropsType> = (
                             onSetClickHandler={onSetClickHandler}
                             disableSetButton={disableSetButton}
                             error={error}
+                            errorInputs={errorInputs}
             />
             <ResultScreen disabledRightBlock={disabledRightBlock}
                           disableIncButton={disableIncButton}

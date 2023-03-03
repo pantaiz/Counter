@@ -9,6 +9,5 @@ export const StyledSettingsScreen = styled.div`
   border: 2px solid #709bdb;
   margin: 10px;
   width: 350px;
-
 `;
 

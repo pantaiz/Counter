@@ -18,18 +18,25 @@ export const ErrorMessage = styled.div`
   color: #db7070;
 
 `;
-export const ErorrImage=styled.img`
+export const ErorrImage = styled.img`
   position: fixed;
   right: 0px;
-  bottom: 300px;
-  width: 20%;`
+  bottom: 100px;
+  width: 20%;
+  border-radius: 10px;
+  opacity: 0;
+  animation: ani 4s forwards;
+  @keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+`
 
 interface PrintValueStyleProps {
     max: boolean
 }
 
 export const PrintValueStyle = styled.div<PrintValueStyleProps>`
-  font-weight:600 ;
+  font-weight: 600;
   font-size: 32px;
-  color: ${props => props.max ? "rgba(132, 219, 112)": "black"};
+  color: ${props => props.max ? "rgba(132, 219, 112)" : "black"};
 `
